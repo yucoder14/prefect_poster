@@ -2,6 +2,7 @@ from PIL import Image
 import os
 import math
 from fpdf import FPDF
+import argparse
 
 
 num_col = 4
@@ -119,7 +120,13 @@ class PrefectDocument:
             self.draw_text(text_x1, text_x2, text_y2, name)
 
             j = j + 1
-        self.pdf.output("test1.pdf")
 
-document = PrefectDocument("images")
-document.create()
+        self.pdf.output("prefect_poster.pdf")
+
+if __name__ == "__main__": 
+    parser = argparse.ArgumentParser() 
+    parser.add_argument("-i", "--input_images", required=True)
+    args = parser.parse_args()
+    input_images = args.input_images
+    document = PrefectDocument(input_images)
+    document.create()

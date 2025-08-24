@@ -1,11 +1,24 @@
+Why
+===
 
-What I need to do for images
+Simple script to create prefect posters from images. We have been manually creating the 
+posters by dragging and resizing images inside Google Docs. As a result, we would end up
+with as poster where images had varying sizes with varying aspect ratios. So I wrote this
+script to automatically crop the images to have a uniform aspect ratio and create the poster. 
 
-Since images are or different aspect ratio, I must decide upon an aspect ratio 
-and then crop the images so that they all have the same aspect ratio (4:5)
+Will it be ever used by any other person than me? I don't know.
 
-Then, I need to arrange the images in some table with names under the names 
-I'm thinking four per row
+Dependencies
+============
 
-Then, I need to save the table as a pdf.
+```
+fpdf2
+```
 
+
+Usage
+=====
+
+```
+python3 prefect_poster.py -i /path/to/images
+```

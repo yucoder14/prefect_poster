@@ -121,7 +121,7 @@ class PrefectDocument:
 
             j = j + 1
 
-        self.pdf.output("prefect_poster.pdf")
+        self.pdf.output("poster.pdf")
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser() 

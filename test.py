@@ -57,15 +57,15 @@ def draw_box(pdf, x1, y1, x2, y2):
 
 # page setup
 pdf.add_page()
-draw_box(pdf, page_margin, page_margin, pdf.w - page_margin, pdf.h - page_margin)
 
-for i in range(1, num_col):
+num_row = 3
+for i in range(0, num_col + 1):
     pdf.line(x1= page_margin + i * col_width, 
              y1= page_margin, 
              x2= page_margin + i * col_width, 
-             y2= pdf.h - page_margin)
+             y2= page_margin + num_row * row_height)
 
-for i in range(1, num_row):
+for i in range(0, num_row + 1):
     pdf.line(x1 = page_margin, 
              y1 = page_margin + i * row_height, 
              x2 = pdf.w - page_margin, 

@@ -49,10 +49,10 @@ class LanyardDocument(PDFGrid):
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser() 
-    parser.add_argument("-i", "--input_names", required=True)
+    parser.add_argument("-i", "--input_names_file", required=True)
     parser.add_argument("-l", "--logo",)
     args = parser.parse_args()
-    input_names = args.input_names
+    input_names = args.input_names_file
     logo = args.logo
     document = LanyardDocument(input_names, logo)
     document.create_poster()

@@ -76,8 +76,8 @@ class PrefectDocument(PDFGrid):
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser() 
-    parser.add_argument("-i", "--input_images", required=True)
+    parser.add_argument("-i", "--input_images_dir", required=True)
     args = parser.parse_args()
-    input_images = args.input_images
+    input_images = args.input_images_dir
     document = PrefectDocument(input_images)
     document.create_poster()

@@ -1,0 +1,4 @@
+defusedxml==0.7.1
+fonttools==4.59.2
+fpdf2==2.8.4
+pillow==11.3.0

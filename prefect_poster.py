@@ -86,7 +86,7 @@ class PrefectDocument:
 
         return (image.name.split(".")[0].replace("_", " "), cropped_img)
 
-    def create(self): 
+    def create_poster(self): 
         with os.scandir(self.images_path) as image_iterator:
             images = list(image_iterator)
             cropped_images = [self.crop_image_name(image) for image in images]
@@ -95,7 +95,7 @@ class PrefectDocument:
         i = 0
         j = 0 
 
-        for image in cropped_images: 
+        for image in sorted(cropped_images, key=lambda tup: tup[0].split()[-1].lower()): 
             if j == self.num_col: 
                 j = 0
                 i = i + 1
@@ -123,10 +123,13 @@ class PrefectDocument:
 
         self.pdf.output("poster.pdf")
 
+    def create_lanyard(self):
+        pass
+
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser() 
     parser.add_argument("-i", "--input_images", required=True)
     args = parser.parse_args()
     input_images = args.input_images
     document = PrefectDocument(input_images)
-    document.create()
+    document.create_poster()

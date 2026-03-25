@@ -12,6 +12,7 @@ class LanyardDocument(PDFGrid):
         with open(names, "r") as f:
             self.names = f.readlines()
 
+        self.logo = None
         if logo is not None:
             self.logo = Image.open(logo)
             self.logo_width = 40 
@@ -41,7 +42,8 @@ class LanyardDocument(PDFGrid):
             self.draw_text(x1, x2, halfway + 70, "Department of Computer")
             self.draw_text(x1, x2, halfway + 80, "Science")
 
-            self.draw_image(self.logo, x2 - self.logo_width, y1, self.logo_width)
+            if self.logo is not None: 
+                self.draw_image(self.logo, x2 - self.logo_width, y1, self.logo_width)
 
             j = j + 1
 

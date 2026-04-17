@@ -43,16 +43,19 @@ def ratio_type(string) -> float:
 def main():
     parser = argparse.ArgumentParser(description="create student poster with headshots")
 
-    parser.add_argument('-d', '--dimension', type=dimension_type, default=(1024, 768),
-                        help="Page dimensions as WIDTHxHEIGHT (default: 1024x768)")
+    parser.add_argument('-d', '--dimension', type=dimension_type, default=(1920, 1080),
+                        help="Page dimensions as WIDTHxHEIGHT (default: 1920x1080)")
     parser.add_argument('-g', '--grid', type=grid_type, default=(4, 2),
                         help="Grid size as COLxROW (default: 4x2)")
     parser.add_argument('--background_color', type=color_type, default=(0, 0, 0),
                         help="Background color as R,G,B")
     parser.add_argument('--line_color', type=color_type, default=(255, 255, 255),
                         help="Line color as R,G,B")
-    parser.add_argument('--aspect_ratio', type=ratio_type, default=4/5)
+    parser.add_argument('--aspect_ratio', type=ratio_type, default=1.0)
 
+    parser.add_argument('--title_font_size', type=int, default=50)
+    parser.add_argument('--font_size', type=int, default=24)
+    parser.add_argument('--lines', action='store_true')
     parser.add_argument('--page_margin', type=int, default=40)
     parser.add_argument('--font_path', type=str, required=True)
     parser.add_argument('-i','--image_dir', type=str, required=True)
@@ -70,9 +73,13 @@ def main():
     background_color = args.background_color
     line_color = args.line_color
 
-    image_dir = args.image_dir
+    lines = args.lines
+    image_dir = Path(args.image_dir)
     font_path = args.font_path
     out_dir = args.out_dir
+
+    title_font_size = args.title_font_size
+    font_size = args.font_size
 
     assert os.path.exists(image_dir), f"{image_dir} does not exist"
     assert os.path.exists(font_path), f"{font_path} does not exist"
@@ -82,8 +89,8 @@ def main():
     image_paths = list(map(lambda path: Path(image_dir) / path, image_paths))
     images = load_images(image_paths)
 
-    doc = Document(page_width, page_height, page_margin, num_row, num_col, font_path, background_color, line_color)
-    doc.draw_headshots(names, images, aspect_ratio, font_size=18, padding=10)
+    doc = Document(page_width, page_height, page_margin, num_row, num_col, font_path, background_color, line_color, image_dir.name, title_font_size)
+    doc.draw_headshots(names, images, aspect_ratio, font_size=font_size, padding=10, grids=lines)
     doc.save(out_dir)
 
 if __name__ == "__main__":
